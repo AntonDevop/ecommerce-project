@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from . import forms
 
 def home_page(request):
@@ -23,3 +24,33 @@ def contact_page(request):
         email = request.POST.get("email")
         content = request.POST.get("content")
     return render(request, 'contact.html', context)
+
+def login_page(request):
+    login_form = forms.LoginForm(request.POST or None)
+    context = {
+        "title":"Login",
+        "content":"Welcome to the login page",
+        "form": login_form,
+        "error": ''
+    }
+    if login_form.is_valid():
+        username = login_form.cleaned_data.get("username")
+        password = login_form.cleaned_data.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            context["error"] = "There is no such user!"
+            return render(request,  "auth/login.html", context)
+
+    return render(request, "auth/login.html", context)
+
+def register_page(request):
+
+    context = {
+        "title":"Login",
+        "content":"Welcome to the login page",
+        "form": contact_form
+    }
+    return render(request, "auth/login.html", context)

@@ -35,3 +35,21 @@ class ContactForm(forms.Form):
         if not "gamil.com" in email:
             raise forms.ValidationError("Your email must be a gmail!")
         return email
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter your username"
+                }
+                )
+            )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter your password"
+                }
+                )
+            )

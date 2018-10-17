@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Product
 # importing class of model for searching against it
@@ -16,3 +16,9 @@ def product_list_view(request):
     queryset = Product.objects.all()
     context = {'qs': queryset}
     return render(request, "products/list-fbv.html", context)
+
+# Class based view for detailed view of the product
+class ProductDetailView(DetailView):
+    queryset = Product.objects.all()
+    # grabs everything from Product table of database
+    template_name = "products/detail.html"

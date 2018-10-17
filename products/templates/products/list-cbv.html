@@ -1,0 +1,16 @@
+<h1>This is class based view template</h1>
+
+<p>
+  QuerySet objects lists processed with forloop:
+</p>
+
+<ol>
+  {% for item in object_list %}
+  <li>
+    <p>
+      Product: {{ item.title|title }}. Price = {{ item.price }}
+    </p>
+    <hr />
+  </li>
+  {% endfor %}
+</ol>

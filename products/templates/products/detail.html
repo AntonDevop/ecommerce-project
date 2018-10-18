@@ -13,3 +13,9 @@
 <p>
   ${{object.price}}
 </p>
+{% if object.image %}
+<h6>Image:</h6>
+<p>
+  <img src="{{object.image.url}}"/>
+</p>
+{% endif %}
